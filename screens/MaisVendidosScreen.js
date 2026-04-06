@@ -33,12 +33,18 @@ function Estrelas() {
   );
 }
 
-function CardProduto() {
+function CardProduto({ navigation }) {
   return (
     <View style={styles.card}>
       <Estrelas />
+
       <View style={styles.imagemPlaceholder} />
-      <TouchableOpacity style={styles.botaoComprar} activeOpacity={0.8}>
+
+      <TouchableOpacity
+        style={styles.botaoComprar}
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate("Carrinho")}
+      >
         <Text style={styles.botaoComprarTexto}>COMPRAR</Text>
       </TouchableOpacity>
     </View>
@@ -52,12 +58,13 @@ export default function MaisVendidosScreen({ navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
 
+      {/* Header */}
       <View style={styles.topoBranco}>
         <View style={styles.header}>
           <View style={styles.colunaEsquerda}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
-                source={require('../assets/menu.png')}
+                source={require("../assets/menu.png")}
                 style={styles.iconeMenu}
                 resizeMode="contain"
               />
@@ -66,7 +73,7 @@ export default function MaisVendidosScreen({ navigation }) {
 
           <View style={styles.colunaCentral}>
             <Image
-              source={require('../assets/logo.png')}
+              source={require("../assets/logo.png")}
               style={styles.logo}
               resizeMode="contain"
             />
@@ -75,14 +82,19 @@ export default function MaisVendidosScreen({ navigation }) {
           <View style={styles.colunaDireita}>
             <TouchableOpacity style={styles.iconBtn}>
               <Image
-                source={require('../assets/acessibilidade.png')}
+                source={require("../assets/acessibilidade.png")}
                 style={styles.iconePadrao}
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconBtn}>
+
+            {/* BOTÃO CARRINHO FUNCIONANDO */}
+            <TouchableOpacity
+              style={styles.iconBtn}
+              onPress={() => navigation.navigate("Carrinho")}
+            >
               <Image
-                source={require('../assets/carrinho.png')}
+                source={require("../assets/carrinho.png")}
                 style={styles.iconePadrao}
                 resizeMode="contain"
               />
@@ -90,10 +102,11 @@ export default function MaisVendidosScreen({ navigation }) {
           </View>
         </View>
 
+        {/* Busca */}
         <View style={styles.searchContainer}>
           <View style={styles.searchBar}>
             <Image
-              source={require('../assets/lupa.png')}
+              source={require("../assets/lupa.png")}
               style={styles.iconeLupa}
               resizeMode="contain"
             />
@@ -108,12 +121,17 @@ export default function MaisVendidosScreen({ navigation }) {
         </View>
       </View>
 
+      {/* Conteúdo */}
       <View style={styles.fundoAzul}>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {/* Filtro */}
           <View style={styles.filtroContainer}>
             <TouchableOpacity style={styles.btnFiltro} activeOpacity={0.8}>
               <Image
-                source={require('../assets/filtro.png')}
+                source={require("../assets/filtro.png")}
                 style={styles.iconeFiltro}
                 resizeMode="contain"
               />
@@ -121,9 +139,10 @@ export default function MaisVendidosScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
+          {/* Produtos */}
+          <CardProduto navigation={navigation} />
+          <CardProduto navigation={navigation} />
+          <CardProduto navigation={navigation} />
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -135,60 +154,73 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
+
   topoBranco: {
     backgroundColor: COLORS.white,
     paddingBottom: 10,
   },
+
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: COLORS.white,
-    width: '100%',
+    width: "100%",
   },
+
   colunaEsquerda: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
+
   colunaCentral: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
+
   colunaDireita: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
   },
+
   logo: {
     width: 200,
     height: 55,
   },
+
   iconeMenu: {
     width: 24,
     height: 24,
   },
+
   iconBtn: {
     marginLeft: 15,
   },
+
   iconePadrao: {
     width: 24,
     height: 24,
   },
+
   iconeLupa: {
     width: 16,
     height: 16,
     tintColor: COLORS.white,
   },
+
   iconeFiltro: {
     width: 16,
     height: 16,
   },
+
   searchContainer: {
     paddingHorizontal: 15,
     marginTop: 5,
   },
+
   searchBar: {
     flexDirection: "row",
     alignItems: "center",
@@ -197,51 +229,61 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 35,
   },
+
   searchInput: {
     flex: 1,
     marginLeft: 10,
     color: COLORS.white,
     fontSize: 12,
   },
+
   fundoAzul: {
     flex: 1,
     backgroundColor: COLORS.darkBlue,
   },
+
   scrollContent: {
     padding: 15,
   },
+
   filtroContainer: {
     marginBottom: 15,
   },
+
   btnFiltro: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: COLORS.white,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     paddingVertical: 6,
     paddingHorizontal: 20,
-    alignItems: 'center',
+    alignItems: "center",
     gap: 10,
   },
+
   textoFiltro: {
     color: "#000000",
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
+
   card: {
     backgroundColor: COLORS.white,
     padding: 15,
     marginBottom: 15,
   },
+
   imagemPlaceholder: {
     width: "100%",
     height: 120,
     marginBottom: 20,
   },
+
   botaoComprar: {
     backgroundColor: COLORS.cyan,
     padding: 12,
     alignItems: "center",
   },
+
   botaoComprarTexto: {
     color: COLORS.white,
     fontWeight: "bold",

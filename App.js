@@ -1,11 +1,11 @@
 import React from 'react';
-import { enableScreens } from 'react-native-screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import MaisVendidosScreen from './screens/MaisVendidosScreen';
+import CarrinhoScreen from './screens/CarrinhoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +16,8 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="MaisVendidos" component={MaisVendidosScreen} />
+        <Stack.Screen name="Carrinho" component={CarrinhoScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

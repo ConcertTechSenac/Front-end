@@ -1,31 +1,25 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import COLORS from '../constants/colors';
-import HamburgerIcon from './icons/HamburgerIcon';
-import MonitorIcon from './icons/MonitorIcon';
-import AccessibilityIcon from './icons/AccessibilityIcon';
-import CartIcon from './icons/CartIcon';
+import React from "react";
+import { View, Image, StyleSheet, TouchableOpacity, Platform, StatusBar } from "react-native";
+import COLORS from "../constants/colors";
 
-export default function Header() {
+export default function Header({ navigation, onMenuPress }) {
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.headerIcon}>
-        <HamburgerIcon />
+      <TouchableOpacity style={styles.headerIcon} activeOpacity={0.8} onPress={onMenuPress}>
+        <Image source={require("../assets/menu.png")} style={styles.icon} resizeMode="contain" />
       </TouchableOpacity>
 
       <View style={styles.logoContainer}>
-        <MonitorIcon />
-        <Text style={styles.logoText}>
-          HARD<Text style={styles.logoAccent}>TECH</Text>
-        </Text>
+        <Image source={require("../assets/logo.png")} style={styles.logo} resizeMode="contain" />
       </View>
 
       <View style={styles.headerRight}>
-        <TouchableOpacity style={styles.headerIcon}>
-          <AccessibilityIcon />
+        <TouchableOpacity style={styles.headerIcon} activeOpacity={0.8}>
+          <Image source={require("../assets/acessibilidade.png")} style={styles.icon} resizeMode="contain" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerIcon}>
-          <CartIcon />
+
+        <TouchableOpacity style={styles.headerIcon} activeOpacity={0.8} onPress={() => navigation.navigate("Carrinho")}>
+          <Image source={require("../assets/carrinho.png")} style={styles.icon} resizeMode="contain" />
         </TouchableOpacity>
       </View>
     </View>
@@ -34,11 +28,12 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight + 8 : 12,
+    paddingBottom: 12,
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.gray100,
@@ -48,24 +43,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 4,
   },
-  headerIcon: {
-    padding: 6,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    gap: 4,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    gap: 2,
-  },
-  logoText: {
-    fontSize: 13,
-    fontWeight: '900',
-    color: COLORS.primary,
-    letterSpacing: 2,
-  },
-  logoAccent: {
-    color: COLORS.accent,
-  },
+  headerIcon: { padding: 6 },
+  headerRight: { flexDirection: "row", alignItems: "center" },
+  logoContainer: { alignItems: "center", justifyContent: "center" },
+  logo: { width: 110, height: 40 },
+  icon: { width: 22, height: 22 },
 });
