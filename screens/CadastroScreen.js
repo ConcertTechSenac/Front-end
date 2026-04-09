@@ -15,10 +15,14 @@ import {
 } from 'react-native';
 import COLORS from '../constants/colors';
 
-export default function LoginScreen({ navigation }) {
+export default function CadastroScreen({ navigation }) {
   const { width } = useWindowDimensions();
+  
+  // Estados para os campos de cadastro
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
 
   const logoWidth = Math.min(width * 0.45, 200);
   const logoHeight = logoWidth * 0.62;
@@ -42,8 +46,20 @@ export default function LoginScreen({ navigation }) {
             resizeMode="contain"
           />
 
-          <Text style={styles.title}>Acesse sua conta ou cadastre-se</Text>
+          <Text style={styles.title}>Crie sua conta preenchendo os dados abaixo</Text>
 
+          {/* Campo Nome e Sobrenome */}
+          <TextInput
+            style={styles.input}
+            placeholder="Nome e Sobrenome"
+            placeholderTextColor={COLORS.gray400}
+            value={nome}
+            onChangeText={setNome}
+            autoCapitalize="words"
+            returnKeyType="next"
+          />
+
+          {/* Campo Email */}
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -55,43 +71,55 @@ export default function LoginScreen({ navigation }) {
             returnKeyType="next"
           />
 
+          {/* Campo Senha */}
           <TextInput
             style={styles.input}
             placeholder="Senha"
             placeholderTextColor={COLORS.gray400}
-            value={password}
-            onChangeText={setPassword}
+            value={senha}
+            onChangeText={setSenha}
+            secureTextEntry={true}
+            autoCapitalize="none"
+            returnKeyType="next"
+          />
+
+          {/* Campo Confirmar Senha */}
+          <TextInput
+            style={styles.input}
+            placeholder="Confirmar senha"
+            placeholderTextColor={COLORS.gray400}
+            value={confirmarSenha}
+            onChangeText={setConfirmarSenha}
             secureTextEntry={true}
             autoCapitalize="none"
             returnKeyType="done"
           />
-
-          <TouchableOpacity
-            style={styles.primaryButton}
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('Home')}
-          >
-            <Text style={styles.primaryButtonText}>CONTINUAR</Text>
-          </TouchableOpacity>
-
-          <View style={styles.divider}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>ou</Text>
-            <View style={styles.dividerLine} />
-          </View>
-
-          {/* MODIFICADO: Agora este botão navega para a tela de Cadastro */}
+{/* Botão Confirmar (Azul igual ao Continuar) */}
+<TouchableOpacity
+  style={styles.primaryButton}
+  activeOpacity={0.8}
+  onPress={() => {
+      console.log("Cadastro realizado!");
+      // Agora ele navega para a tela do código de 4 dígitos:
+      navigation.navigate('Verificacao'); 
+  }}
+>
+  <Text style={styles.primaryButtonText}>CONFIRMAR</Text>
+</TouchableOpacity>
+          {/* Link para voltar ao Login se já tiver conta */}
           <TouchableOpacity 
-            style={styles.cadastroButton} 
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('Cadastro')}
+            style={styles.voltarLogin} 
+            onPress={() => navigation.goBack()}
           >
-            <Text style={styles.cadastroButtonText}>Cadastre-se</Text>
+            <Text style={styles.voltarLoginText}>
+                Já tem uma conta? <Text style={{fontWeight: '700'}}>Faça login</Text>
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.spacer} />
         </ScrollView>
 
+        {/* Footer mantido conforme solicitado */}
         <View style={styles.footer}>
           <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Home')}>
             <Text style={styles.footerText}>Home</Text>
@@ -124,11 +152,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.white,
     paddingHorizontal: 16,
-    paddingTop: 48,
+    paddingTop: 30, // Reduzi um pouco para caber mais campos na tela
     paddingBottom: 20,
   },
   logo: {
-    marginBottom: 24,
+    marginBottom: 20,
   },
   title: {
     fontSize: 16,
@@ -145,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 16,
-    marginBottom: 16,
+    marginBottom: 12, // Reduzi o espaçamento entre campos
     fontSize: 15,
     color: COLORS.text,
     backgroundColor: COLORS.background,
@@ -153,10 +181,11 @@ const styles = StyleSheet.create({
   primaryButton: {
     width: '100%',
     height: 50,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primary, // Cor azul original
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
     marginBottom: 16,
     elevation: 3,
     shadowColor: COLORS.primary,
@@ -170,40 +199,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     letterSpacing: 1.5,
   },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    marginVertical: 16,
+  voltarLogin: {
+    padding: 10,
   },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: COLORS.gray200,
-  },
-  dividerText: {
-    marginHorizontal: 12,
-    color: COLORS.gray400,
+  voltarLoginText: {
+    color: COLORS.text,
     fontSize: 14,
-    fontWeight: '500',
-  },
-  cadastroButton: {
-    width: '100%',
-    height: 50,
-    borderColor: COLORS.primary,
-    borderWidth: 1.5,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 12,
-  },
-  cadastroButtonText: {
-    color: COLORS.primary,
-    fontWeight: '600',
-    fontSize: 15,
   },
   spacer: {
-    height: 24,
+    height: 40,
   },
   footer: {
     flexDirection: 'row',
@@ -212,11 +216,6 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     justifyContent: 'space-around',
     alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   footerItem: {
     padding: 6,
