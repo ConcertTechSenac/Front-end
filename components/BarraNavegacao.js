@@ -13,8 +13,11 @@ export default function BarraNavegacao({ navigation, telaAtiva }) {
     { label: 'Departamentos', tela: 'MaisVendidos' },
     { label: 'Favoritos', tela: null },
     { label: 'Minha Conta', tela: 'Login' },
+<<<<<<< HEAD
     { label: 'Monte PC', tela: 'MonteSeuPC' },
     { label: 'Minha Conta', tela: 'MeusDados' },
+=======
+>>>>>>> e1d576089bf1c750bd32a7eebb3355b045b7b266
   ];
 
   return (
