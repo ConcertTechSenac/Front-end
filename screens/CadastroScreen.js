@@ -121,18 +121,9 @@ export default function CadastroScreen({ navigation }) {
 
         {/* Footer mantido conforme solicitado */}
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.footerText}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('MaisVendidos')}>
-            <Text style={styles.footerText}>Departamentos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem}>
-            <Text style={styles.footerText}>Favoritos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem}>
-            <Text style={styles.footerText}>Minha Conta</Text>
-          </TouchableOpacity>
+          
+        
+      
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -209,20 +200,5 @@ const styles = StyleSheet.create({
   spacer: {
     height: 40,
   },
-  footer: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.primary,
-    width: '100%',
-    paddingVertical: 14,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  footerItem: {
-    padding: 6,
-  },
-  footerText: {
-    color: COLORS.white,
-    fontSize: 12,
-    fontWeight: '500',
-  },
+  
 });

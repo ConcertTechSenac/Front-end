@@ -10,7 +10,7 @@ const COLORS = {
 export default function BarraNavegacao({ navigation, telaAtiva }) {
   const itens = [
     { label: 'Home', tela: 'Home' },
-    { label: 'Departamentos', tela: 'MaisVendidos' },
+    { label: 'Mais Vendidos', tela: 'MaisVendidos' },
     { label: 'Monte PC', tela: 'MonteSeuPC' },
     { label: 'Minha Conta', tela: 'MeusDados' },
   ];

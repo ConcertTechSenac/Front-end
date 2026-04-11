@@ -15,7 +15,7 @@ import COLORS from "../constants/colors";
 export default function MeusDadosScreen({ navigation }) {
   const [nome, setNome] = useState("Guilherme Martins");
   const [email, setEmail] = useState("guilherme@email.com");
-  const [telefone, setTelefone] = useState("(11) 99999-9999");
+  const [senha, setSenha] = useState("123456"); // Alterado de telefone para senha
   const [editando, setEditando] = useState(false);
 
   const pedidos = [
@@ -43,6 +43,7 @@ export default function MeusDadosScreen({ navigation }) {
             <Image
               source={require("../assets/logo.png")}
               style={styles.logo}
+              resizeMode="contain" // Adicionado para ajustar a logo corretamente
             />
           </View>
 
@@ -96,12 +97,13 @@ export default function MeusDadosScreen({ navigation }) {
             onChangeText={setEmail}
           />
 
-          <Text style={styles.label}>Telefone</Text>
+          <Text style={styles.label}>Senha</Text> 
           <TextInput
             style={styles.input}
-            value={telefone}
+            value={senha}
             editable={editando}
-            onChangeText={setTelefone}
+            onChangeText={setSenha}
+            secureTextEntry={true} // Adicionado para ocultar os caracteres da senha
           />
 
           <TouchableOpacity
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   colunaCentral: {
-    flex: 1,
+    flex: 2, // Aumentado para dar mais espaço para a logo centralizada
     alignItems: "center",
   },
   colunaDireita: {
@@ -156,8 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   logo: {
-    width: 200,
-    height: 42,
+    width: 250, // Ajustado para um tamanho mais padrão
+    height: 40,
   },
   iconeMenu: {
     width: 24,
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
   },
   tituloSecao: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "800",
     marginBottom: 12,
   },
   label: {
@@ -222,12 +224,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     marginTop: 5,
+    color: "#333",
   },
   botaoEditar: {
     backgroundColor: COLORS.primary,
     marginTop: 16,
     padding: 12,
     alignItems: "center",
+    borderRadius: 4,
   },
   botaoTexto: {
     color: COLORS.white,
