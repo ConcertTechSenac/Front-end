@@ -93,18 +93,9 @@ export default function LoginScreen({ navigation }) {
         </ScrollView>
 
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Home')}>
-            <Text style={styles.footerText}>Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('MaisVendidos')}>
-            <Text style={styles.footerText}>Departamentos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem}>
-            <Text style={styles.footerText}>Favoritos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.footerItem}>
-            <Text style={styles.footerText}>Minha Conta</Text>
-          </TouchableOpacity>
+         
+         
+          
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -205,25 +196,5 @@ const styles = StyleSheet.create({
   spacer: {
     height: 24,
   },
-  footer: {
-    flexDirection: 'row',
-    backgroundColor: COLORS.primary,
-    width: '100%',
-    paddingVertical: 14,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  footerItem: {
-    padding: 6,
-  },
-  footerText: {
-    color: COLORS.white,
-    fontSize: 12,
-    fontWeight: '500',
-  },
+ 
 });
