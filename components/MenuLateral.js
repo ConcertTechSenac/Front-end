@@ -45,10 +45,10 @@ export default function MenuLateral({ onClose, navigation }) {
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
 
         {/* GRUPO 1 */}
-        <View style={styles.item}>
-          <Image source={require('../assets/home.png')} style={styles.iconeMenu} resizeMode="contain" />
-          <Text style={[styles.itemTexto, styles.inativo]}>Minha Conta</Text>
-        </View>
+        <TouchableOpacity style={styles.item} onPress={() => navegarPara('MeusDados')}>
+          <Image source={require('../assets/adicionar.png')} style={styles.iconeMenu} resizeMode="contain" />
+          <Text style={styles.itemTexto}>Meus Dados</Text>
+        </TouchableOpacity>
 
         <View style={styles.item}>
           <Image source={require('../assets/acessibilidade.png')} style={styles.iconeMenu} resizeMode="contain" />
@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.darkBlue },
   
   // === ESTILO DO HEADER ATUALIZADO ===
-  header: { 
+  header: {
     height: 60, // Adicionado para manter a altura do topo, já que não há mais conteúdo dentro
-    backgroundColor: COLORS.darkBlue 
+    backgroundColor: COLORS.darkBlue
   },
   
   logo: { width: 110, height: 36 },
