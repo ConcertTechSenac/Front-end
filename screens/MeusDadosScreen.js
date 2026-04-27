@@ -15,7 +15,7 @@ import COLORS from "../constants/colors";
 export default function MeusDadosScreen({ navigation }) {
   const [nome, setNome] = useState("Guilherme Martins");
   const [email, setEmail] = useState("guilherme@email.com");
-  const [senha, setSenha] = useState("123456"); // Alterado de telefone para senha
+  const [senha, setSenha] = useState("123456");
   const [editando, setEditando] = useState(false);
 
   const pedidos = [
@@ -40,11 +40,17 @@ export default function MeusDadosScreen({ navigation }) {
           </View>
 
           <View style={styles.colunaCentral}>
-            <Image
-              source={require("../assets/logo.png")}
-              style={styles.logo}
-              resizeMode="contain" // Adicionado para ajustar a logo corretamente
-            />
+            {/* ATALHO NO LOGO: Agora leva para a Home ao clicar na foto */}
+            <TouchableOpacity 
+              activeOpacity={0.7} 
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
           </View>
 
           <View style={styles.colunaDireita}>
@@ -55,7 +61,10 @@ export default function MeusDadosScreen({ navigation }) {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.iconBtn}>
+            <TouchableOpacity 
+              style={styles.iconBtn}
+              onPress={() => navigation.navigate("Carrinho")}
+            >
               <Image
                 source={require("../assets/carrinho.png")}
                 style={styles.iconePadrao}
@@ -103,7 +112,7 @@ export default function MeusDadosScreen({ navigation }) {
             value={senha}
             editable={editando}
             onChangeText={setSenha}
-            secureTextEntry={true} // Adicionado para ocultar os caracteres da senha
+            secureTextEntry={true}
           />
 
           <TouchableOpacity
@@ -149,7 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   colunaCentral: {
-    flex: 2, // Aumentado para dar mais espaço para a logo centralizada
+    flex: 2,
     alignItems: "center",
   },
   colunaDireita: {
@@ -158,7 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   logo: {
-    width: 250, // Ajustado para um tamanho mais padrão
+    width: 200,
     height: 40,
   },
   iconeMenu: {

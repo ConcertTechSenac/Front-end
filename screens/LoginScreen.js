@@ -12,6 +12,7 @@ import {
   StatusBar,
   useWindowDimensions,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import COLORS from '../constants/colors';
 
@@ -22,6 +23,22 @@ export default function LoginScreen({ navigation }) {
 
   const logoWidth = Math.min(width * 0.45, 200);
   const logoHeight = logoWidth * 0.62;
+
+  const handleLogin = () => {
+
+    if (!email.includes('@')) {
+      Alert.alert('Atenção', 'O endereço de email tem de conter o símbolo "@".');
+      return;
+    }
+
+    const quantidadeNumeros = (password.match(/\d/g) || []).length;
+    if (quantidadeNumeros < 3) {
+      Alert.alert('Atenção', 'A senha tem de conter pelo menos 3 números.');
+      return;
+    }
+
+    navigation.navigate('Home');
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -69,7 +86,7 @@ export default function LoginScreen({ navigation }) {
           <TouchableOpacity
             style={styles.primaryButton}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('Home')}
+            onPress={handleLogin} // MODIFICADO: Chama a função de validação
           >
             <Text style={styles.primaryButtonText}>CONTINUAR</Text>
           </TouchableOpacity>
@@ -80,7 +97,6 @@ export default function LoginScreen({ navigation }) {
             <View style={styles.dividerLine} />
           </View>
 
-          {/* MODIFICADO: Agora este botão navega para a tela de Cadastro */}
           <TouchableOpacity 
             style={styles.cadastroButton} 
             activeOpacity={0.8}
@@ -93,8 +109,6 @@ export default function LoginScreen({ navigation }) {
         </ScrollView>
 
         <View style={styles.footer}>
-         
-         
           
         </View>
       </KeyboardAvoidingView>
@@ -196,5 +210,4 @@ const styles = StyleSheet.create({
   spacer: {
     height: 24,
   },
- 
 });
