@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import { 
   View, Text, TextInput, TouchableOpacity, StyleSheet, 
-  Image, KeyboardAvoidingView, Platform, ScrollView, 
+  Image, Alert, KeyboardAvoidingView, Platform, ScrollView, 
   TouchableWithoutFeedback, Keyboard 
 } from 'react-native';
 
 const COLORS = { darkBlue: '#282b75', cyan: '#00aeee', white: '#ffffff' };
 
-export default function CadastroScreen({ navigation }) {
-  const [nome, setNome] = useState('');
+export default function AdminLoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
-  const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
 
-  const handleCadastro = () => {
-    // Lógica futura: cadastrar no banco via Spring Boot
-    if (senha !== confirmarSenha) {
-      alert("As senhas não coincidem!");
+  const handleAdminLogin = () => {
+    if (email.trim() === '' || senha.trim() === '') {
+      Alert.alert('Atenção', 'Preencha o e-mail e a senha para testar o acesso.');
       return;
     }
-    navigation.navigate('Verificacao'); // Rota que está no seu App.js
+    
+    // Navega para a tela real de produtos após o "login"
+    navigation.navigate('AdminProdutos');
   };
 
   return (
@@ -39,30 +37,15 @@ export default function CadastroScreen({ navigation }) {
               resizeMode="contain" 
             />
             
-            <Text style={styles.titulo}>Crie sua conta</Text>
+            <Text style={styles.titulo}>Área do Administrador</Text>
             
             <TextInput 
               style={styles.input} 
-              placeholder="Nome Completo" 
-              value={nome} 
-              onChangeText={setNome}
-            />
-
-            <TextInput 
-              style={styles.input} 
-              placeholder="E-mail" 
+              placeholder="E-mail Admin" 
               value={email} 
               onChangeText={setEmail}
-              keyboardType="email-address"
               autoCapitalize="none"
-            />
-
-            <TextInput 
-              style={styles.input} 
-              placeholder="Telefone" 
-              value={telefone} 
-              onChangeText={setTelefone}
-              keyboardType="phone-pad"
+              keyboardType="email-address"
             />
             
             <TextInput 
@@ -73,20 +56,12 @@ export default function CadastroScreen({ navigation }) {
               onChangeText={setSenha}
             />
 
-            <TextInput 
-              style={styles.input} 
-              placeholder="Confirmar Senha" 
-              secureTextEntry 
-              value={confirmarSenha} 
-              onChangeText={setConfirmarSenha}
-            />
-
-            <TouchableOpacity style={styles.botaoPrincipal} onPress={handleCadastro}>
-              <Text style={styles.botaoTextoPrincipal}>CADASTRAR</Text>
+            <TouchableOpacity style={styles.botaoPrincipal} onPress={handleAdminLogin}>
+              <Text style={styles.botaoTextoPrincipal}>ENTRAR</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.botaoSecundario} onPress={() => navigation.goBack()}>
-              <Text style={styles.botaoTextoSecundario}>JÁ TENHO CONTA (VOLTAR)</Text>
+              <Text style={styles.botaoTextoSecundario}>VOLTAR PARA LOGIN NORMAL</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
@@ -100,9 +75,9 @@ const styles = StyleSheet.create({
   innerContainer: { flex: 1 },
   headerAzul: { height: 60, backgroundColor: COLORS.darkBlue },
   scrollContent: { flexGrow: 1, justifyContent: 'center', padding: 30 },
-  logo: { width: 160, height: 50, alignSelf: 'center', marginBottom: 20 },
-  titulo: { fontSize: 22, fontWeight: 'bold', color: COLORS.darkBlue, marginBottom: 25, textAlign: 'center' },
-  input: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, padding: 15, marginBottom: 15, color: '#333' },
+  logo: { width: 180, height: 150, alignSelf: 'center', marginBottom: 20 },
+  titulo: { fontSize: 22, fontWeight: 'bold', color: COLORS.darkBlue, marginBottom: 30, textAlign: 'center' },
+  input: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, padding: 15, marginBottom: 15 },
   botaoPrincipal: { backgroundColor: COLORS.darkBlue, padding: 15, borderRadius: 8, alignItems: 'center', marginTop: 10 },
   botaoTextoPrincipal: { color: COLORS.white, fontWeight: 'bold' },
   botaoSecundario: { borderWidth: 1, borderColor: COLORS.cyan, padding: 15, borderRadius: 8, alignItems: 'center', marginTop: 15 },

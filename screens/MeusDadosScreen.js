@@ -11,23 +11,12 @@ import {
   ScrollView,
 } from "react-native";
 import COLORS from "../constants/colors";
-<<<<<<< HEAD
 import BotaoVoltar from "../components/BotaoVoltar";
-=======
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 
 export default function MeusDadosScreen({ navigation }) {
   const [nome, setNome] = useState("Guilherme Martins");
   const [email, setEmail] = useState("guilherme@email.com");
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const [senha, setSenha] = useState("123456");
-=======
-  const [telefone, setTelefone] = useState("(11) 99999-9999");
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-  const [senha, setSenha] = useState("123456");
->>>>>>> origin/Main
+  const [senha, setSenha] = useState("123456"); 
   const [editando, setEditando] = useState(false);
 
   const pedidos = [
@@ -40,28 +29,10 @@ export default function MeusDadosScreen({ navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
 
+      {/* Header com Logo e Ícones */}
       <View style={styles.topoBranco}>
         <View style={styles.header}>
           <View style={styles.colunaEsquerda}>
-<<<<<<< HEAD
-            <Image
-              source={require("../assets/menu.png")}
-              style={styles.iconeMenu}
-            />
-          </View>
-
-          <View style={styles.colunaCentral}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate("Home")}
-            >
-              <Image
-                source={require("../assets/logo.png")}
-                style={styles.logo}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-=======
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={require("../assets/menu.png")}
@@ -71,14 +42,7 @@ export default function MeusDadosScreen({ navigation }) {
           </View>
 
           <View style={styles.colunaCentral}>
-<<<<<<< HEAD
-            <Image
-              source={require("../assets/logo.png")}
-              style={styles.logo}
-            />
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-            {/* ATALHO NO LOGO: Agora leva para a Home ao clicar na foto */}
+            {/* ATALHO NO LOGO: Leva para a Home */}
             <TouchableOpacity 
               activeOpacity={0.7} 
               onPress={() => navigation.navigate("Home")}
@@ -89,7 +53,6 @@ export default function MeusDadosScreen({ navigation }) {
                 resizeMode="contain"
               />
             </TouchableOpacity>
->>>>>>> origin/Main
           </View>
 
           <View style={styles.colunaDireita}>
@@ -100,21 +63,10 @@ export default function MeusDadosScreen({ navigation }) {
               />
             </TouchableOpacity>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <TouchableOpacity
-              style={styles.iconBtn}
-              onPress={() => navigation.navigate("Carrinho")}
-            >
-=======
-            <TouchableOpacity style={styles.iconBtn}>
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
             <TouchableOpacity 
               style={styles.iconBtn}
               onPress={() => navigation.navigate("Carrinho")}
             >
->>>>>>> origin/Main
               <Image
                 source={require("../assets/carrinho.png")}
                 style={styles.iconePadrao}
@@ -124,24 +76,15 @@ export default function MeusDadosScreen({ navigation }) {
         </View>
       </View>
 
+      {/* Faixa Azul com Botão Voltar e Título */}
       <View style={styles.faixaAzul}>
-<<<<<<< HEAD
-        {/* ✅ BOTÃO VOLTAR */}
         <BotaoVoltar navigation={navigation} />
-=======
-        <TouchableOpacity
-          style={styles.botaoVoltar}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.seta}>←</Text>
-          <Text style={styles.textoVoltar}>Voltar</Text>
-        </TouchableOpacity>
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-
         <Text style={styles.tituloTela}>Meus Dados</Text>
+        <View style={{ width: 40 }} /> 
       </View>
 
       <ScrollView style={styles.container}>
+        {/* Card de Dados Pessoais */}
         <View style={styles.card}>
           <Text style={styles.tituloSecao}>Dados Pessoais</Text>
 
@@ -159,33 +102,16 @@ export default function MeusDadosScreen({ navigation }) {
             value={email}
             editable={editando}
             onChangeText={setEmail}
+            autoCapitalize="none"
           />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <Text style={styles.label}>Senha</Text>
-          <TextInput
-            style={styles.input}
-            value={senha}
-            editable={editando}
-            onChangeText={setSenha}
-            secureTextEntry={true}
-=======
-          <Text style={styles.label}>Telefone</Text>
-=======
           <Text style={styles.label}>Senha</Text> 
->>>>>>> origin/Main
           <TextInput
             style={styles.input}
             value={senha}
             editable={editando}
-<<<<<<< HEAD
-            onChangeText={setTelefone}
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
             onChangeText={setSenha}
-            secureTextEntry={true}
->>>>>>> origin/Main
+            secureTextEntry={true} // Oculta a senha
           />
 
           <TouchableOpacity
@@ -198,6 +124,7 @@ export default function MeusDadosScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* Card de Histórico */}
         <View style={styles.card}>
           <Text style={styles.tituloSecao}>Histórico de Pedidos</Text>
 
@@ -231,15 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   colunaCentral: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    flex: 2,
-=======
-    flex: 1,
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-    flex: 2,
->>>>>>> origin/Main
+    flex: 2, 
     alignItems: "center",
   },
   colunaDireita: {
@@ -248,16 +167,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   logo: {
-    width: 200,
-<<<<<<< HEAD
-<<<<<<< HEAD
+    width: 150, 
     height: 40,
-=======
-    height: 42,
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-    height: 40,
->>>>>>> origin/Main
   },
   iconeMenu: {
     width: 24,
@@ -271,33 +182,16 @@ const styles = StyleSheet.create({
     marginLeft: 14,
   },
   faixaAzul: {
-    height: 72,
+    height: 60,
     backgroundColor: COLORS.primary,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 12,
   },
-<<<<<<< HEAD
-=======
-  botaoVoltar: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  seta: {
-    color: COLORS.white,
-    fontSize: 18,
-    marginRight: 6,
-    fontWeight: "bold",
-  },
-  textoVoltar: {
-    color: COLORS.white,
-    fontSize: 15,
-  },
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   tituloTela: {
     color: COLORS.white,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
   },
   container: {
@@ -308,19 +202,13 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 16,
     borderRadius: 8,
+    elevation: 2,
   },
   tituloSecao: {
     fontSize: 16,
-<<<<<<< HEAD
-<<<<<<< HEAD
     fontWeight: "800",
-=======
-    fontWeight: "700",
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-    fontWeight: "800",
->>>>>>> origin/Main
     marginBottom: 12,
+    color: COLORS.primary,
   },
   label: {
     fontSize: 13,
@@ -333,28 +221,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     marginTop: 5,
-<<<<<<< HEAD
-<<<<<<< HEAD
     color: "#333",
-=======
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-    color: "#333",
->>>>>>> origin/Main
   },
   botaoEditar: {
     backgroundColor: COLORS.primary,
-    marginTop: 16,
-    padding: 12,
+    marginTop: 20,
+    padding: 15,
     alignItems: "center",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    borderRadius: 4,
-=======
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-    borderRadius: 4,
->>>>>>> origin/Main
+    borderRadius: 6,
   },
   botaoTexto: {
     color: COLORS.white,
@@ -363,7 +237,7 @@ const styles = StyleSheet.create({
   pedidoItem: {
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
   pedidoTexto: {
     fontSize: 14,
@@ -372,9 +246,6 @@ const styles = StyleSheet.create({
   pedidoValor: {
     fontSize: 13,
     color: "#555",
+    marginTop: 4,
   },
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660

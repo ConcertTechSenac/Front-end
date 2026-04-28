@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Importação das Telas de Usuário
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import MaisVendidosScreen from './screens/MaisVendidosScreen';
@@ -10,6 +11,8 @@ import CadastroScreen from './screens/CadastroScreen';
 import VerificacaoScreen from './screens/VerificacaoScreen'; 
 import MeusDadosScreen from './screens/MeusDadosScreen';
 import MonteSeuPCScreen from './screens/MonteSeuPCScreen';
+import AdminLoginScreen from './screens/AdminLoginScreen';
+import AdminProdutosScreen from './screens/AdminProdutosScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +20,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+        {/* Rotas de Usuário */}
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="MaisVendidos" component={MaisVendidosScreen} />
@@ -25,6 +29,8 @@ export default function App() {
         <Stack.Screen name="Verificacao" component={VerificacaoScreen} />
         <Stack.Screen name="MonteSeuPC" component={MonteSeuPCScreen} />
         <Stack.Screen name="MeusDados" component={MeusDadosScreen} />
+        <Stack.Screen name="AdminLogin" component={AdminLoginScreen} />
+        <Stack.Screen name="AdminProdutos" component={AdminProdutosScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
