@@ -12,7 +12,10 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import COLORS from "../constants/colors";
+<<<<<<< HEAD
 import BotaoVoltar from "../components/BotaoVoltar";
+=======
+>>>>>>> origin/Main
 
 export default function PagamentoScreen({ navigation }) {
   const [metodo, setMetodo] = useState(null);
@@ -53,18 +56,32 @@ export default function PagamentoScreen({ navigation }) {
       if (!validarCartao()) return;
     }
 
+<<<<<<< HEAD
     Alert.alert("Sucesso", "Compra concluída com sucesso!", [
       {
         text: "Ir para Home →",
         onPress: () => navigation.navigate("Home"),
       },
     ]);
+=======
+    Alert.alert(
+      "Sucesso",
+      "Compra concluída com sucesso!",
+      [
+        {
+          text: "Ir para Home →",
+          onPress: () => navigation.navigate("Home"),
+        },
+      ]
+    );
+>>>>>>> origin/Main
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
 
+<<<<<<< HEAD
       {/* ✅ BOTÃO VOLTAR no topo, sobre fundo branco */}
       <View style={styles.topBar}>
         <BotaoVoltar navigation={navigation} cor={COLORS.primary} />
@@ -74,6 +91,11 @@ export default function PagamentoScreen({ navigation }) {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
+=======
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+        
+        {/* LOGO CENTRAL */}
+>>>>>>> origin/Main
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
             source={require("../assets/logo.png")}
@@ -87,10 +109,14 @@ export default function PagamentoScreen({ navigation }) {
         <View style={styles.valorBox}>
           <Text style={styles.valorLabel}>Valor total</Text>
           <Text style={styles.valor}>
+<<<<<<< HEAD
             R${" "}
             {metodo === "pix"
               ? valorPix.toFixed(2)
               : valorOriginal.toFixed(2)}
+=======
+            R$ {metodo === "pix" ? valorPix.toFixed(2) : valorOriginal.toFixed(2)}
+>>>>>>> origin/Main
           </Text>
           {metodo === "pix" && (
             <Text style={styles.desconto}>5% de desconto aplicado</Text>
@@ -147,9 +173,13 @@ export default function PagamentoScreen({ navigation }) {
               value={numero}
               onChangeText={setNumero}
             />
+<<<<<<< HEAD
             {erroNumero !== "" && (
               <Text style={styles.erro}>{erroNumero}</Text>
             )}
+=======
+            {erroNumero !== "" && <Text style={styles.erro}>{erroNumero}</Text>}
+>>>>>>> origin/Main
 
             <TextInput
               placeholder="Nome no cartão"
@@ -182,7 +212,13 @@ export default function PagamentoScreen({ navigation }) {
           style={styles.primaryButton}
           onPress={confirmarPagamento}
         >
+<<<<<<< HEAD
           <Text style={styles.primaryButtonText}>CONFIRMAR PAGAMENTO</Text>
+=======
+          <Text style={styles.primaryButtonText}>
+            CONFIRMAR PAGAMENTO
+          </Text>
+>>>>>>> origin/Main
         </TouchableOpacity>
 
         <View style={{ height: 30 }} />
@@ -196,11 +232,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
+<<<<<<< HEAD
   topBar: {
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 4,
   },
+=======
+>>>>>>> origin/Main
   content: {
     padding: 20,
     alignItems: "center",
@@ -327,4 +366,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     letterSpacing: 1,
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> origin/Main

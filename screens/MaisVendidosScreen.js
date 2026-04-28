@@ -97,11 +97,17 @@ export default function MaisVendidosScreen({ navigation }) {
 <<<<<<< HEAD
 =======
           <View style={styles.colunaCentral}>
-            <Image
-              source={require("../assets/logo.png")}
-              style={styles.logo}
-              resizeMode="contain"
-            />
+            {/* ATALHO NO LOGO: Agora leva para a Home ao clicar na foto */}
+            <TouchableOpacity 
+              activeOpacity={0.7} 
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
           </View>
 
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
@@ -220,6 +226,7 @@ const styles = StyleSheet.create({
 =======
 
   colunaCentral: {
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -242,8 +249,8 @@ const styles = StyleSheet.create({
 =======
 
   logo: {
-    width: 200,
-    height: 55,
+    width: 180,
+    height: 50,
   },
 
   iconeMenu: {

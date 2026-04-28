@@ -13,9 +13,13 @@ import {
   useWindowDimensions,
   SafeAreaView,
 <<<<<<< HEAD
+<<<<<<< HEAD
   Alert,
 =======
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+  Alert,
+>>>>>>> origin/Main
 } from 'react-native';
 import COLORS from '../constants/colors';
 
@@ -28,6 +32,9 @@ export default function LoginScreen({ navigation }) {
   const logoHeight = logoWidth * 0.62;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Main
   const handleLogin = () => {
 
     if (!email.includes('@')) {
@@ -44,8 +51,11 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate('Home');
   };
 
+<<<<<<< HEAD
 =======
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+>>>>>>> origin/Main
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
@@ -93,10 +103,14 @@ export default function LoginScreen({ navigation }) {
             style={styles.primaryButton}
             activeOpacity={0.8}
 <<<<<<< HEAD
+<<<<<<< HEAD
             onPress={handleLogin} // MODIFICADO: Chama a função de validação
 =======
             onPress={() => navigation.navigate('Home')}
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+            onPress={handleLogin} // MODIFICADO: Chama a função de validação
+>>>>>>> origin/Main
           >
             <Text style={styles.primaryButtonText}>CONTINUAR</Text>
           </TouchableOpacity>
@@ -108,9 +122,12 @@ export default function LoginScreen({ navigation }) {
           </View>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           {/* MODIFICADO: Agora este botão navega para a tela de Cadastro */}
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+>>>>>>> origin/Main
           <TouchableOpacity 
             style={styles.cadastroButton} 
             activeOpacity={0.8}
@@ -123,6 +140,7 @@ export default function LoginScreen({ navigation }) {
         </ScrollView>
 
         <View style={styles.footer}>
+<<<<<<< HEAD
 <<<<<<< HEAD
           
 =======
@@ -139,6 +157,9 @@ export default function LoginScreen({ navigation }) {
             <Text style={styles.footerText}>Minha Conta</Text>
           </TouchableOpacity>
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+          
+>>>>>>> origin/Main
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -240,6 +261,7 @@ const styles = StyleSheet.create({
     height: 24,
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   footer: {
     flexDirection: 'row',
@@ -263,4 +285,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+>>>>>>> origin/Main
 });

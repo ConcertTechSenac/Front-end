@@ -20,10 +20,14 @@ export default function MeusDadosScreen({ navigation }) {
   const [nome, setNome] = useState("Guilherme Martins");
   const [email, setEmail] = useState("guilherme@email.com");
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [senha, setSenha] = useState("123456");
 =======
   const [telefone, setTelefone] = useState("(11) 99999-9999");
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+  const [senha, setSenha] = useState("123456");
+>>>>>>> origin/Main
   const [editando, setEditando] = useState(false);
 
   const pedidos = [
@@ -67,11 +71,25 @@ export default function MeusDadosScreen({ navigation }) {
           </View>
 
           <View style={styles.colunaCentral}>
+<<<<<<< HEAD
             <Image
               source={require("../assets/logo.png")}
               style={styles.logo}
             />
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+            {/* ATALHO NO LOGO: Agora leva para a Home ao clicar na foto */}
+            <TouchableOpacity 
+              activeOpacity={0.7} 
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+>>>>>>> origin/Main
           </View>
 
           <View style={styles.colunaDireita}>
@@ -83,6 +101,7 @@ export default function MeusDadosScreen({ navigation }) {
             </TouchableOpacity>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             <TouchableOpacity
               style={styles.iconBtn}
               onPress={() => navigation.navigate("Carrinho")}
@@ -90,6 +109,12 @@ export default function MeusDadosScreen({ navigation }) {
 =======
             <TouchableOpacity style={styles.iconBtn}>
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+            <TouchableOpacity 
+              style={styles.iconBtn}
+              onPress={() => navigation.navigate("Carrinho")}
+            >
+>>>>>>> origin/Main
               <Image
                 source={require("../assets/carrinho.png")}
                 style={styles.iconePadrao}
@@ -137,6 +162,7 @@ export default function MeusDadosScreen({ navigation }) {
           />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Text style={styles.label}>Senha</Text>
           <TextInput
             style={styles.input}
@@ -146,12 +172,20 @@ export default function MeusDadosScreen({ navigation }) {
             secureTextEntry={true}
 =======
           <Text style={styles.label}>Telefone</Text>
+=======
+          <Text style={styles.label}>Senha</Text> 
+>>>>>>> origin/Main
           <TextInput
             style={styles.input}
-            value={telefone}
+            value={senha}
             editable={editando}
+<<<<<<< HEAD
             onChangeText={setTelefone}
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+            onChangeText={setSenha}
+            secureTextEntry={true}
+>>>>>>> origin/Main
           />
 
           <TouchableOpacity
@@ -198,10 +232,14 @@ const styles = StyleSheet.create({
   },
   colunaCentral: {
 <<<<<<< HEAD
+<<<<<<< HEAD
     flex: 2,
 =======
     flex: 1,
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+    flex: 2,
+>>>>>>> origin/Main
     alignItems: "center",
   },
   colunaDireita: {
@@ -212,10 +250,14 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 40,
 =======
     height: 42,
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+    height: 40,
+>>>>>>> origin/Main
   },
   iconeMenu: {
     width: 24,
@@ -270,10 +312,14 @@ const styles = StyleSheet.create({
   tituloSecao: {
     fontSize: 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
     fontWeight: "800",
 =======
     fontWeight: "700",
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+    fontWeight: "800",
+>>>>>>> origin/Main
     marginBottom: 12,
   },
   label: {
@@ -288,9 +334,13 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 5,
 <<<<<<< HEAD
+<<<<<<< HEAD
     color: "#333",
 =======
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+    color: "#333",
+>>>>>>> origin/Main
   },
   botaoEditar: {
     backgroundColor: COLORS.primary,
@@ -298,9 +348,13 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: "center",
 <<<<<<< HEAD
+<<<<<<< HEAD
     borderRadius: 4,
 =======
 >>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
+=======
+    borderRadius: 4,
+>>>>>>> origin/Main
   },
   botaoTexto: {
     color: COLORS.white,
