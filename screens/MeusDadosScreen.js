@@ -11,11 +11,19 @@ import {
   ScrollView,
 } from "react-native";
 import COLORS from "../constants/colors";
+<<<<<<< HEAD
+import BotaoVoltar from "../components/BotaoVoltar";
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 
 export default function MeusDadosScreen({ navigation }) {
   const [nome, setNome] = useState("Guilherme Martins");
   const [email, setEmail] = useState("guilherme@email.com");
+<<<<<<< HEAD
+  const [senha, setSenha] = useState("123456");
+=======
   const [telefone, setTelefone] = useState("(11) 99999-9999");
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   const [editando, setEditando] = useState(false);
 
   const pedidos = [
@@ -31,6 +39,25 @@ export default function MeusDadosScreen({ navigation }) {
       <View style={styles.topoBranco}>
         <View style={styles.header}>
           <View style={styles.colunaEsquerda}>
+<<<<<<< HEAD
+            <Image
+              source={require("../assets/menu.png")}
+              style={styles.iconeMenu}
+            />
+          </View>
+
+          <View style={styles.colunaCentral}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+=======
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={require("../assets/menu.png")}
@@ -44,6 +71,7 @@ export default function MeusDadosScreen({ navigation }) {
               source={require("../assets/logo.png")}
               style={styles.logo}
             />
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
           </View>
 
           <View style={styles.colunaDireita}>
@@ -54,7 +82,14 @@ export default function MeusDadosScreen({ navigation }) {
               />
             </TouchableOpacity>
 
+<<<<<<< HEAD
+            <TouchableOpacity
+              style={styles.iconBtn}
+              onPress={() => navigation.navigate("Carrinho")}
+            >
+=======
             <TouchableOpacity style={styles.iconBtn}>
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
               <Image
                 source={require("../assets/carrinho.png")}
                 style={styles.iconePadrao}
@@ -65,6 +100,10 @@ export default function MeusDadosScreen({ navigation }) {
       </View>
 
       <View style={styles.faixaAzul}>
+<<<<<<< HEAD
+        {/* ✅ BOTÃO VOLTAR */}
+        <BotaoVoltar navigation={navigation} />
+=======
         <TouchableOpacity
           style={styles.botaoVoltar}
           onPress={() => navigation.goBack()}
@@ -72,6 +111,7 @@ export default function MeusDadosScreen({ navigation }) {
           <Text style={styles.seta}>←</Text>
           <Text style={styles.textoVoltar}>Voltar</Text>
         </TouchableOpacity>
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 
         <Text style={styles.tituloTela}>Meus Dados</Text>
       </View>
@@ -96,12 +136,22 @@ export default function MeusDadosScreen({ navigation }) {
             onChangeText={setEmail}
           />
 
+<<<<<<< HEAD
+          <Text style={styles.label}>Senha</Text>
+          <TextInput
+            style={styles.input}
+            value={senha}
+            editable={editando}
+            onChangeText={setSenha}
+            secureTextEntry={true}
+=======
           <Text style={styles.label}>Telefone</Text>
           <TextInput
             style={styles.input}
             value={telefone}
             editable={editando}
             onChangeText={setTelefone}
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
           />
 
           <TouchableOpacity
@@ -147,7 +197,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   colunaCentral: {
+<<<<<<< HEAD
+    flex: 2,
+=======
     flex: 1,
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
     alignItems: "center",
   },
   colunaDireita: {
@@ -157,7 +211,11 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
+<<<<<<< HEAD
+    height: 40,
+=======
     height: 42,
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   },
   iconeMenu: {
     width: 24,
@@ -178,6 +236,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 12,
   },
+<<<<<<< HEAD
+=======
   botaoVoltar: {
     flexDirection: "row",
     alignItems: "center",
@@ -192,6 +252,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 15,
   },
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   tituloTela: {
     color: COLORS.white,
     fontSize: 16,
@@ -208,7 +269,11 @@ const styles = StyleSheet.create({
   },
   tituloSecao: {
     fontSize: 16,
+<<<<<<< HEAD
+    fontWeight: "800",
+=======
     fontWeight: "700",
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
     marginBottom: 12,
   },
   label: {
@@ -222,12 +287,20 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     marginTop: 5,
+<<<<<<< HEAD
+    color: "#333",
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   },
   botaoEditar: {
     backgroundColor: COLORS.primary,
     marginTop: 16,
     padding: 12,
     alignItems: "center",
+<<<<<<< HEAD
+    borderRadius: 4,
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   },
   botaoTexto: {
     color: COLORS.white,
@@ -246,4 +319,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#555",
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660

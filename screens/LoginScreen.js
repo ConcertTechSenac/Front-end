@@ -12,6 +12,10 @@ import {
   StatusBar,
   useWindowDimensions,
   SafeAreaView,
+<<<<<<< HEAD
+  Alert,
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 } from 'react-native';
 import COLORS from '../constants/colors';
 
@@ -23,6 +27,25 @@ export default function LoginScreen({ navigation }) {
   const logoWidth = Math.min(width * 0.45, 200);
   const logoHeight = logoWidth * 0.62;
 
+<<<<<<< HEAD
+  const handleLogin = () => {
+
+    if (!email.includes('@')) {
+      Alert.alert('Atenção', 'O endereço de email tem de conter o símbolo "@".');
+      return;
+    }
+
+    const quantidadeNumeros = (password.match(/\d/g) || []).length;
+    if (quantidadeNumeros < 3) {
+      Alert.alert('Atenção', 'A senha tem de conter pelo menos 3 números.');
+      return;
+    }
+
+    navigation.navigate('Home');
+  };
+
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
@@ -69,7 +92,11 @@ export default function LoginScreen({ navigation }) {
           <TouchableOpacity
             style={styles.primaryButton}
             activeOpacity={0.8}
+<<<<<<< HEAD
+            onPress={handleLogin} // MODIFICADO: Chama a função de validação
+=======
             onPress={() => navigation.navigate('Home')}
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
           >
             <Text style={styles.primaryButtonText}>CONTINUAR</Text>
           </TouchableOpacity>
@@ -80,7 +107,10 @@ export default function LoginScreen({ navigation }) {
             <View style={styles.dividerLine} />
           </View>
 
+<<<<<<< HEAD
+=======
           {/* MODIFICADO: Agora este botão navega para a tela de Cadastro */}
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
           <TouchableOpacity 
             style={styles.cadastroButton} 
             activeOpacity={0.8}
@@ -93,6 +123,9 @@ export default function LoginScreen({ navigation }) {
         </ScrollView>
 
         <View style={styles.footer}>
+<<<<<<< HEAD
+          
+=======
           <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Home')}>
             <Text style={styles.footerText}>Home</Text>
           </TouchableOpacity>
@@ -105,6 +138,7 @@ export default function LoginScreen({ navigation }) {
           <TouchableOpacity style={styles.footerItem}>
             <Text style={styles.footerText}>Minha Conta</Text>
           </TouchableOpacity>
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -205,6 +239,8 @@ const styles = StyleSheet.create({
   spacer: {
     height: 24,
   },
+<<<<<<< HEAD
+=======
   footer: {
     flexDirection: 'row',
     backgroundColor: COLORS.primary,
@@ -226,4 +262,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
   },
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 });
