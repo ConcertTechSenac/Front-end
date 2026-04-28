@@ -10,6 +10,10 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
+<<<<<<< HEAD
+import BotaoVoltar from "../components/BotaoVoltar";
+=======
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
 
 const COLORS = {
   darkBlue: "#282b75",
@@ -37,9 +41,13 @@ function CardProduto({ navigation }) {
   return (
     <View style={styles.card}>
       <Estrelas />
+<<<<<<< HEAD
+      <View style={styles.imagemPlaceholder} />
+=======
 
       <View style={styles.imagemPlaceholder} />
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
       <TouchableOpacity
         style={styles.botaoComprar}
         activeOpacity={0.8}
@@ -62,15 +70,32 @@ export default function MaisVendidosScreen({ navigation }) {
       <View style={styles.topoBranco}>
         <View style={styles.header}>
           <View style={styles.colunaEsquerda}>
+<<<<<<< HEAD
+            {/* ✅ BOTÃO VOLTAR */}
+            <BotaoVoltar navigation={navigation} cor={COLORS.darkBlue} />
+          </View>
+
+          <View style={styles.colunaCentral}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/logo.png")}
+                style={styles.logo}
+=======
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 source={require("../assets/menu.png")}
                 style={styles.iconeMenu}
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
                 resizeMode="contain"
               />
             </TouchableOpacity>
           </View>
 
+<<<<<<< HEAD
+=======
           <View style={styles.colunaCentral}>
             {/* ATALHO NO LOGO: Agora leva para a Home ao clicar na foto */}
             <TouchableOpacity 
@@ -85,6 +110,7 @@ export default function MaisVendidosScreen({ navigation }) {
             </TouchableOpacity>
           </View>
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
           <View style={styles.colunaDireita}>
             <TouchableOpacity style={styles.iconBtn}>
               <Image
@@ -94,7 +120,10 @@ export default function MaisVendidosScreen({ navigation }) {
               />
             </TouchableOpacity>
 
+<<<<<<< HEAD
+=======
             {/* BOTÃO CARRINHO FUNCIONANDO */}
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
             <TouchableOpacity
               style={styles.iconBtn}
               onPress={() => navigation.navigate("Carrinho")}
@@ -160,12 +189,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   topoBranco: {
     backgroundColor: COLORS.white,
     paddingBottom: 10,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -174,11 +209,21 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     width: "100%",
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   colunaEsquerda: {
     flex: 1,
     alignItems: "flex-start",
   },
+<<<<<<< HEAD
+  colunaCentral: {
+    flex: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+=======
 
   colunaCentral: {
     flex: 2,
@@ -186,12 +231,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   colunaDireita: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
   },
+<<<<<<< HEAD
+  logo: {
+    width: 180,
+    height: 50,
+  },
+  iconBtn: {
+    marginLeft: 15,
+  },
+=======
 
   logo: {
     width: 180,
@@ -207,27 +262,40 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   iconePadrao: {
     width: 24,
     height: 24,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   iconeLupa: {
     width: 16,
     height: 16,
     tintColor: COLORS.white,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   iconeFiltro: {
     width: 16,
     height: 16,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   searchContainer: {
     paddingHorizontal: 15,
     marginTop: 5,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   searchBar: {
     flexDirection: "row",
     alignItems: "center",
@@ -236,18 +304,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 35,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   searchInput: {
     flex: 1,
     marginLeft: 10,
     color: COLORS.white,
     fontSize: 12,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   fundoAzul: {
     flex: 1,
     backgroundColor: COLORS.darkBlue,
   },
+<<<<<<< HEAD
+  scrollContent: {
+    padding: 15,
+  },
+  filtroContainer: {
+    marginBottom: 15,
+  },
+=======
 
   scrollContent: {
     padding: 15,
@@ -257,6 +339,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   btnFiltro: {
     flexDirection: "row",
     backgroundColor: COLORS.white,
@@ -266,34 +349,53 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   textoFiltro: {
     color: "#000000",
     fontSize: 12,
     fontWeight: "bold",
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   card: {
     backgroundColor: COLORS.white,
     padding: 15,
     marginBottom: 15,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   imagemPlaceholder: {
     width: "100%",
     height: 120,
     marginBottom: 20,
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   botaoComprar: {
     backgroundColor: COLORS.cyan,
     padding: 12,
     alignItems: "center",
   },
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
   botaoComprarTexto: {
     color: COLORS.white,
     fontWeight: "bold",
     fontSize: 14,
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
