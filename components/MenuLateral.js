@@ -45,23 +45,11 @@ export default function MenuLateral({ onClose, navigation }) {
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
 
         {/* GRUPO 1 */}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/Main
+
         <TouchableOpacity style={styles.item} onPress={() => navegarPara('MeusDados')}>
           <Image source={require('../assets/adicionar.png')} style={styles.iconeMenu} resizeMode="contain" />
           <Text style={styles.itemTexto}>Meus Dados</Text>
         </TouchableOpacity>
-<<<<<<< HEAD
-=======
-        <View style={styles.item}>
-          <Image source={require('../assets/home.png')} style={styles.iconeMenu} resizeMode="contain" />
-          <Text style={[styles.itemTexto, styles.inativo]}>Minha Conta</Text>
-        </View>
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
->>>>>>> origin/Main
 
         <View style={styles.item}>
           <Image source={require('../assets/acessibilidade.png')} style={styles.iconeMenu} resizeMode="contain" />
@@ -103,11 +91,6 @@ export default function MenuLateral({ onClose, navigation }) {
           </View>
         )}
 
-        <TouchableOpacity style={styles.item} onPress={() => navegarPara('MaisVendidos')}>
-          <Image source={require('../assets/sacola.png')} style={styles.iconeMenu} resizeMode="contain" />
-          <Text style={styles.itemTexto}>Mais vendidos</Text>
-        </TouchableOpacity>
-
       </ScrollView>
     </View>
   );
@@ -117,21 +100,10 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.darkBlue },
   
   // === ESTILO DO HEADER ATUALIZADO ===
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   header: {
     height: 60, // Adicionado para manter a altura do topo, já que não há mais conteúdo dentro
     backgroundColor: COLORS.darkBlue
-=======
-  header: { 
-    height: 60, // Adicionado para manter a altura do topo, já que não há mais conteúdo dentro
-    backgroundColor: COLORS.darkBlue 
->>>>>>> 4dafc75ab10abab6a281d5ed36e1ed810a1f7660
-=======
-  header: {
-    height: 60, // Adicionado para manter a altura do topo, já que não há mais conteúdo dentro
-    backgroundColor: COLORS.darkBlue
->>>>>>> origin/Main
   },
   
   logo: { width: 110, height: 36 },
