@@ -5,7 +5,7 @@ import {
   Image, KeyboardAvoidingView, Platform, ScrollView,
   TouchableWithoutFeedback, Keyboard, ActivityIndicator, Alert,
 } from 'react-native';
-import { apiLogin } from '../services/api';
+import { apiLogin, apiLoginAdmin } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const COLORS = { darkBlue: '#282b75', cyan: '#00aeee', white: '#ffffff' };
@@ -17,19 +17,25 @@ export default function LoginScreen({ navigation }) {
   const { login } = useAuth();
 
   const validarEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim());
+  const isAdmin = email.trim().toLowerCase() === 'admin';
 
   const handleLogin = async () => {
     if (!email.trim()) { Alert.alert('Atenção', 'Informe seu e-mail.'); return; }
-    if (!validarEmail(email)) { Alert.alert('Atenção', 'E-mail inválido.'); return; }
+    if (!isAdmin && !validarEmail(email)) { Alert.alert('Atenção', 'E-mail inválido.'); return; }
     if (!senha.trim()) { Alert.alert('Atenção', 'Informe sua senha.'); return; }
-    if (senha.length < 6) { Alert.alert('Atenção', 'Senha deve ter pelo menos 6 caracteres.'); return; }
+    if (!isAdmin && senha.length < 6) { Alert.alert('Atenção', 'Senha deve ter pelo menos 6 caracteres.'); return; }
 
     setLoading(true);
     try {
-      const resultado = await apiLogin(email.trim(), senha);
-      // Salva no contexto global
-      login(resultado.user, resultado.token);
-      navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
+      if (isAdmin) {
+        // Fluxo admin — usa a rota /login-admin
+        await apiLoginAdmin(email.trim(), senha);
+        navigation.reset({ index: 0, routes: [{ name: 'AdminHome' }] });
+      } else {
+        const resultado = await apiLogin(email.trim(), senha);
+        login(resultado.user, resultado.token);
+        navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
+      }
     } catch (error) {
       Alert.alert('Erro no login', error.message);
     } finally {
@@ -93,15 +99,6 @@ export default function LoginScreen({ navigation }) {
               <Text style={styles.botaoTextoSecundario}>CADASTRAR-SE</Text>
             </TouchableOpacity>
 
-            <View style={styles.separador} />
-
-            <TouchableOpacity
-              style={styles.botaoSecundario}
-              onPress={() => navigation.navigate('AdminLogin')}
-              disabled={loading}
-            >
-              <Text style={styles.botaoTextoSecundario}>LOGIN COMO ADMINISTRADOR</Text>
-            </TouchableOpacity>
           </ScrollView>
         </View>
       </TouchableWithoutFeedback>
@@ -121,5 +118,4 @@ const styles = StyleSheet.create({
   botaoTextoPrincipal: { color: COLORS.white, fontWeight: 'bold' },
   botaoSecundario: { borderWidth: 1, borderColor: COLORS.cyan, padding: 15, borderRadius: 8, alignItems: 'center', marginTop: 15 },
   botaoTextoSecundario: { color: COLORS.cyan, fontWeight: 'bold' },
-  separador: { height: 1, backgroundColor: '#eee', marginVertical: 5 },
 });
