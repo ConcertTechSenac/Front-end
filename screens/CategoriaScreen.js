@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  TextInput,
   StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -41,12 +42,28 @@ const estilosEstrelas = StyleSheet.create({
 
 export default function CategoriaScreen({ route, navigation }) {
   const categoriaInicial = route.params?.categoria ?? null;
+  const buscaInicial = route.params?.busca ?? '';
+
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(categoriaInicial);
+  const [busca, setBusca] = useState(buscaInicial);
   const { produtos, getProdutosByCategoria } = useProducts();
 
-  const listaProdutos = categoriaSelecionada
+  // Quando vier da busca da Home, limpa o filtro de categoria
+  useEffect(() => {
+    if (buscaInicial) setCategoriaSelecionada(null);
+  }, [buscaInicial]);
+
+  const baseList = categoriaSelecionada
     ? getProdutosByCategoria(categoriaSelecionada)
     : produtos;
+
+  const listaProdutos = busca.trim()
+    ? baseList.filter((p) =>
+        p.nome.toLowerCase().includes(busca.trim().toLowerCase()) ||
+        p.categoria.toLowerCase().includes(busca.trim().toLowerCase()) ||
+        (p.descricao && p.descricao.toLowerCase().includes(busca.trim().toLowerCase()))
+      )
+    : baseList;
 
   const renderFiltros = () => (
     <View style={styles.filtrosContainer}>
@@ -133,7 +150,7 @@ export default function CategoriaScreen({ route, navigation }) {
           <Text style={styles.setaVoltar}>←</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitulo}>
-          {categoriaSelecionada ?? 'Todos os Produtos'}
+          {busca.trim() ? `"${busca.trim()}"` : (categoriaSelecionada ?? 'Todos os Produtos')}
         </Text>
         <TouchableOpacity
           style={styles.btnCarrinho}
@@ -146,6 +163,30 @@ export default function CategoriaScreen({ route, navigation }) {
             resizeMode="contain"
           />
         </TouchableOpacity>
+      </View>
+
+      {/* Barra de busca na tela */}
+      <View style={styles.buscaContainer}>
+        <View style={styles.buscaBar}>
+          <Text style={styles.buscaIcone}>🔍</Text>
+          <TextInput
+            style={styles.buscaInput}
+            placeholder="Buscar produto..."
+            placeholderTextColor={COLORS.gray400}
+            value={busca}
+            onChangeText={(t) => {
+              setBusca(t);
+              if (!t.trim()) setCategoriaSelecionada(null);
+            }}
+            returnKeyType="search"
+            autoFocus={!!buscaInicial}
+          />
+          {busca.length > 0 && (
+            <TouchableOpacity onPress={() => setBusca('')} activeOpacity={0.7}>
+              <Text style={styles.buscaLimpar}>✕</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
 
       <FlatList
@@ -166,7 +207,22 @@ export default function CategoriaScreen({ route, navigation }) {
         renderItem={renderProduto}
         ListEmptyComponent={
           <View style={styles.vazio}>
-            <Text style={styles.vazioTexto}>Nenhum produto nesta categoria ainda.</Text>
+            <Text style={styles.vazioEmoji}>🔍</Text>
+            <Text style={styles.vazioTitulo}>Nenhum produto encontrado</Text>
+            <Text style={styles.vazioTexto}>
+              {busca.trim()
+                ? `Não encontramos resultados para "${busca.trim()}".`
+                : 'Nenhum produto nesta categoria ainda.'}
+            </Text>
+            {busca.trim() && (
+              <TouchableOpacity
+                style={styles.vazioBtnLimpar}
+                onPress={() => setBusca('')}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.vazioBtnTexto}>Limpar busca</Text>
+              </TouchableOpacity>
+            )}
           </View>
         }
         showsVerticalScrollIndicator={false}
@@ -257,6 +313,44 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   preco: { fontSize: 15, fontWeight: '800', color: COLORS.primary, marginTop: 2 },
+  /* Barra de busca */
+  buscaContainer: {
+    backgroundColor: COLORS.white,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.gray100,
+  },
+  buscaBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: COLORS.gray200,
+  },
+  buscaIcone: { fontSize: 14 },
+  buscaInput: {
+    flex: 1,
+    fontSize: 14,
+    color: COLORS.text,
+    fontWeight: '400',
+  },
+  buscaLimpar: { fontSize: 14, color: COLORS.gray400, padding: 2 },
+
+  /* Vazio */
   vazio: { padding: 40, alignItems: 'center' },
-  vazioTexto: { fontSize: 15, color: COLORS.gray400, textAlign: 'center' },
+  vazioEmoji: { fontSize: 40, marginBottom: 12 },
+  vazioTitulo: { fontSize: 17, fontWeight: '700', color: COLORS.text, marginBottom: 6 },
+  vazioTexto: { fontSize: 14, color: COLORS.gray400, textAlign: 'center', marginBottom: 16 },
+  vazioBtnLimpar: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  vazioBtnTexto: { color: '#fff', fontWeight: '700', fontSize: 14 },
 });

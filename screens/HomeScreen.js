@@ -37,7 +37,7 @@ export default function HomeScreen({ navigation }) {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
         >
-          <SearchBar />
+          <SearchBar navigation={navigation} />
           <AdCarousel navigation={navigation} />
           <ProductCards navigation={navigation} />
           <Categories navigation={navigation} />
