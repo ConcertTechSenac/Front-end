@@ -56,7 +56,7 @@ function Campo({ label, hint, value, onChange, placeholder, teclado, multiline, 
 
 // ─────────────────────────────────────────────────────────────────────────────
 export default function AdminProdutosScreen({ navigation }) {
-  const { produtos, adicionarProduto, editarProduto, removerProduto, toggleDestaque } = useProducts();
+  const { produtos, adicionarProduto, editarProduto, removerProduto, toggleDestaque, atualizarEstoque } = useProducts();
 
   const [visible,  setVisible]  = useState(false);
   const [modo,     setModo]     = useState('adicionar'); // 'adicionar' | 'editar' | 'ver'
@@ -112,25 +112,49 @@ export default function AdminProdutosScreen({ navigation }) {
     const err = validar();
     if (err) { Alert.alert('Atenção', err); return; }
     setSalvando(true);
-    await new Promise(r => setTimeout(r, 250));
-    const dados = {
-      nome:          form.nome.trim(),
-      nomeShort:     form.nome.trim().split(' ').slice(0, 2).join(' '),
-      descricao:     form.descricao.trim(),
-      preco:         Number(form.preco),
-      precoOriginal: form.precoOriginal ? Number(form.precoOriginal) : Number(form.preco),
-      estoque:       form.estoque ? Number(form.estoque) : 0,
-      categoria:     form.categoria,
-      imagem:        form.imagem.trim(),
-      avaliacao:     Number(form.avaliacao) || 4.5,
-      avaliacoes:    Number(form.avaliacoes) || 0,
-      destaque:      form.destaque,
-      cor:           form.cor || '#1A2DA8',
-    };
-    if (modo === 'adicionar') { adicionarProduto(dados); Alert.alert('Sucesso', 'Produto adicionado!'); }
-    else                      { editarProduto(atual.id, dados); Alert.alert('Sucesso', 'Produto atualizado!'); }
-    setSalvando(false);
-    fechar();
+    try {
+      const dados = {
+        nome:          form.nome.trim(),
+        nomeShort:     form.nome.trim().split(' ').slice(0, 2).join(' '),
+        descricao:     form.descricao.trim(),
+        preco:         Number(form.preco),
+        precoOriginal: form.precoOriginal ? Number(form.precoOriginal) : Number(form.preco),
+        estoque:       form.estoque ? Number(form.estoque) : 0,
+        categoria:     form.categoria,
+        imagem:        form.imagem.trim(),
+        avaliacao:     Number(form.avaliacao) || 4.5,
+        avaliacoes:    Number(form.avaliacoes) || 0,
+        destaque:      form.destaque,
+        cor:           form.cor || '#1A2DA8',
+      };
+      if (modo === 'adicionar') {
+        await adicionarProduto(dados);
+        Alert.alert('Sucesso', 'Produto adicionado!');
+      } else {
+        await editarProduto(atual.id, dados);
+        Alert.alert('Sucesso', 'Produto atualizado!');
+      }
+      fechar();
+    } catch (e) {
+      Alert.alert('Erro', e.message ?? 'Não foi possível salvar o produto.');
+    } finally {
+      setSalvando(false);
+    }
+  };
+
+  // ── Gerenciar estoque ──────────────────────────────────────────────────────
+
+  const gerenciarEstoque = (p) => {
+    Alert.alert(
+      `📦 Estoque — ${p.nome}`,
+      `Estoque atual: ${p.estoque ?? 0} unidades\nQuantas unidades deseja adicionar?`,
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        { text: '+5 un.',  onPress: () => atualizarEstoque(p.id, 5)  },
+        { text: '+10 un.', onPress: () => atualizarEstoque(p.id, 10) },
+        { text: '+20 un.', onPress: () => atualizarEstoque(p.id, 20) },
+      ]
+    );
   };
 
   // ── Card ───────────────────────────────────────────────────────────────────
@@ -166,9 +190,10 @@ export default function AdminProdutosScreen({ navigation }) {
 
       {/* Ações */}
       <View style={st.acoes}>
-        <TouchableOpacity style={[st.btn, st.btnV]} onPress={() => openVer(item)}  activeOpacity={0.8}><Text style={st.btnTxt}>👁</Text></TouchableOpacity>
-        <TouchableOpacity style={[st.btn, st.btnE]} onPress={() => openEdit(item)} activeOpacity={0.8}><Text style={st.btnTxt}>✏️</Text></TouchableOpacity>
-        <TouchableOpacity style={[st.btn, st.btnX]} onPress={() => excluir(item)}  activeOpacity={0.8}><Text style={st.btnTxt}>🗑</Text></TouchableOpacity>
+        <TouchableOpacity style={[st.btn, st.btnV]} onPress={() => openVer(item)}           activeOpacity={0.8}><Text style={st.btnTxt}>👁</Text></TouchableOpacity>
+        <TouchableOpacity style={[st.btn, st.btnE]} onPress={() => openEdit(item)}          activeOpacity={0.8}><Text style={st.btnTxt}>✏️</Text></TouchableOpacity>
+        <TouchableOpacity style={[st.btn, st.btnS]} onPress={() => gerenciarEstoque(item)}  activeOpacity={0.8}><Text style={st.btnTxt}>📦</Text></TouchableOpacity>
+        <TouchableOpacity style={[st.btn, st.btnX]} onPress={() => excluir(item)}           activeOpacity={0.8}><Text style={st.btnTxt}>🗑</Text></TouchableOpacity>
       </View>
     </View>
   );
@@ -446,6 +471,7 @@ const st = StyleSheet.create({
   btn:  { width: 30, height: 30, borderRadius: 8, alignItems: 'center', justifyContent: 'center' },
   btnV: { backgroundColor: '#EEF2FF' },
   btnE: { backgroundColor: '#FFF8E1' },
+  btnS: { backgroundColor: '#E8F5E9' },
   btnX: { backgroundColor: '#FFEBEE' },
   btnTxt: { fontSize: 14 },
 

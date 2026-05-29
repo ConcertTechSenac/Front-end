@@ -110,7 +110,7 @@ function ProdutoResumoItem({ produto }) {
 
 export default function DashboardScreen({ navigation }) {
   const { usuario: usuarioLogado, logout } = useAuth();
-  const { produtos }                       = useProducts();
+  const { produtos, recarregar: recarregarProdutos } = useProducts();
 
   const [usuarios,   setUsuarios]   = useState([]);
   const [loading,    setLoading]    = useState(true);
@@ -143,10 +143,13 @@ export default function DashboardScreen({ navigation }) {
     if (isRefresh) setRefreshing(true);
     else setLoading(true);
     try {
-      const res = await apiListarUsuarios();
+      const [res] = await Promise.all([
+        apiListarUsuarios(),
+        recarregarProdutos(),
+      ]);
       setUsuarios(res.usuarios || []);
     } catch (err) {
-      Alert.alert('Erro', 'Não foi possível carregar os usuários.\n' + err.message);
+      Alert.alert('Erro', 'Não foi possível carregar os dados.\n' + err.message);
     } finally {
       setLoading(false);
       setRefreshing(false);

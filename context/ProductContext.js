@@ -6,6 +6,7 @@ import {
   apiAtualizarProduto,
   apiToggleDestaque,
   apiDeletarProduto,
+  apiAtualizarEstoque,
 } from '../services/api';
 
 const ProductContext = createContext();
@@ -86,6 +87,24 @@ export function ProductProvider({ children }) {
     }
   };
 
+  const atualizarEstoque = async (id, delta) => {
+    try {
+      const data = await apiAtualizarEstoque(id, delta);
+      if (data.success) {
+        setProdutos((prev) =>
+          prev.map((p) => (p.id === id ? data.produto : p))
+        );
+      }
+    } catch (err) {
+      // fallback local
+      setProdutos((prev) =>
+        prev.map((p) =>
+          p.id === id ? { ...p, estoque: Math.max(0, (p.estoque ?? 0) + delta) } : p
+        )
+      );
+    }
+  };
+
   const getProdutoById = (id) => produtos.find((p) => p.id === Number(id));
 
   const getProdutosByCategoria = (categoria) =>
@@ -103,6 +122,7 @@ export function ProductProvider({ children }) {
         removerProduto,
         toggleDestaque,
         getProdutoById,
+        atualizarEstoque,
         getProdutosByCategoria,
         getProdutosDestaque,
         recarregar: carregarProdutos,

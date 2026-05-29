@@ -6,6 +6,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../constants/colors';
 import { useCart } from '../context/CartContext';
+import { useProducts } from '../context/ProductContext';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -72,6 +73,7 @@ function LinhaResumo({ label, valor, destaque, verde }) {
 
 export default function CheckoutScreen({ navigation }) {
   const { itens, total, totalItens, limparCarrinho } = useCart();
+  const { atualizarEstoque } = useProducts();
 
   const frete       = total >= 299 ? 0 : 29.90;
   const totalFinal  = total + frete;
@@ -124,7 +126,17 @@ export default function CheckoutScreen({ navigation }) {
     Alert.alert(
       '✅ Pedido confirmado!',
       `Pagamento via ${labelMetodo}${msgParcela}.\nTotal: ${fmt(totalFinal)}\n\nObrigado pela sua compra!`,
-      [{ text: 'OK', onPress: () => { limparCarrinho(); navigation.navigate('Home'); } }]
+      [{
+        text: 'OK',
+        onPress: async () => {
+          // Debita estoque de cada item comprado
+          for (const item of itens) {
+            await atualizarEstoque(item.id, -item.quantidade);
+          }
+          limparCarrinho();
+          navigation.navigate('Home');
+        },
+      }]
     );
   };
 

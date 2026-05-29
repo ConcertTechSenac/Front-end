@@ -160,6 +160,15 @@ export const apiToggleDestaque = async (id) => {
   return handleResponse(response);
 };
 
+export const apiAtualizarEstoque = async (id, delta) => {
+  const response = await fetchComTimeout(`${PRODUTOS_URL}/${id}/estoque`, {
+    method: "PATCH",
+    headers: publicHeaders,
+    body: JSON.stringify({ delta }),
+  });
+  return handleResponse(response);
+};
+
 export const apiDeletarProduto = async (id) => {
   const response = await fetchComTimeout(`${PRODUTOS_URL}/${id}`, {
     method: "DELETE",
