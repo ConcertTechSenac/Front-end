@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // ─── URL do servidor ──────────────────────────────────────────────────────────
 // Troque pelo seu IP local (ipconfig no terminal Windows)
 export const BASE_URL = "http://192.168.15.213:3000/api/auth";
+export const PRODUTOS_URL = "http://192.168.15.213:3000/api/produtos";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -121,4 +122,48 @@ export const apiLogout = async () => {
 export const getUsuarioLocal = async () => {
   const raw = await AsyncStorage.getItem("user");
   return raw ? JSON.parse(raw) : null;
+};
+
+// ─── Produtos ─────────────────────────────────────────────────────────────────
+
+export const apiListarProdutos = async () => {
+  const response = await fetchComTimeout(PRODUTOS_URL, {
+    method: "GET",
+    headers: publicHeaders,
+  });
+  return handleResponse(response);
+};
+
+export const apiCriarProduto = async (dados) => {
+  const response = await fetchComTimeout(PRODUTOS_URL, {
+    method: "POST",
+    headers: publicHeaders,
+    body: JSON.stringify(dados),
+  });
+  return handleResponse(response);
+};
+
+export const apiAtualizarProduto = async (id, dados) => {
+  const response = await fetchComTimeout(`${PRODUTOS_URL}/${id}`, {
+    method: "PUT",
+    headers: publicHeaders,
+    body: JSON.stringify(dados),
+  });
+  return handleResponse(response);
+};
+
+export const apiToggleDestaque = async (id) => {
+  const response = await fetchComTimeout(`${PRODUTOS_URL}/${id}/destaque`, {
+    method: "PATCH",
+    headers: publicHeaders,
+  });
+  return handleResponse(response);
+};
+
+export const apiDeletarProduto = async (id) => {
+  const response = await fetchComTimeout(`${PRODUTOS_URL}/${id}`, {
+    method: "DELETE",
+    headers: publicHeaders,
+  });
+  return handleResponse(response);
 };

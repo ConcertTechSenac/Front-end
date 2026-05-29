@@ -1,6 +1,25 @@
-// Resolve a fonte da imagem: require() local (número) ou URL remota (string)
+// Mapa de assets locais — usado quando imagem vem do banco como "local://filename"
+const LOCAL_ASSETS = {
+  'workstation_i7.jpg':       require('../assets/workstation_i7.jpg'),
+  'mini_office_pc_pro.jpg':   require('../assets/mini_office_pc_pro.jpg'),
+  'monitr_27_144hz.png':      require('../assets/monitr_27_144hz.png'),
+  'teclado_mecanico_rgb.jpeg':require('../assets/teclado_mecanico_rgb.jpeg'),
+  'webcam_4k.jpg':            require('../assets/webcam_4k.jpg'),
+  'ssd_nvme.jpg':             require('../assets/ssd_nvme.jpg'),
+  'memoria ram.jpeg':         require('../assets/memoria ram.jpeg'),
+};
+
+// Resolve a fonte da imagem:
+//   number       → require() local direto (legado)
+//   "local://x"  → asset local mapeado acima
+//   "https://…"  → URL remota
 export function fonteImagem(imagem) {
-  return typeof imagem === 'number' ? imagem : { uri: imagem };
+  if (typeof imagem === 'number') return imagem;
+  if (typeof imagem === 'string' && imagem.startsWith('local://')) {
+    const filename = imagem.replace('local://', '');
+    return LOCAL_ASSETS[filename] ?? { uri: '' };
+  }
+  return { uri: imagem };
 }
 
 export const CATEGORIAS = [
