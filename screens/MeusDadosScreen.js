@@ -39,6 +39,14 @@ export default function MeusDadosScreen({ navigation }) {
   }, [carregarPerfil]);
 
   const handleSalvar = async () => {
+    if (!nome.trim() || nome.trim().length < 3) {
+      Alert.alert('Atenção', 'Nome deve ter pelo menos 3 caracteres.');
+      return;
+    }
+    if (telefone.trim() && telefone.replace(/\D/g, '').length < 10) {
+      Alert.alert('Atenção', 'Telefone inválido. Use DDD + número (ex: 11987654321).');
+      return;
+    }
     setSalvando(true);
     try {
       await apiAtualizarPerfil({ nome: nome.trim(), telefone: telefone.trim() });

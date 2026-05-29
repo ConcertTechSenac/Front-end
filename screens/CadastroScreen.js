@@ -17,17 +17,25 @@ export default function CadastroScreen({ navigation }) {
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const validarEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim());
+
   const handleCadastro = async () => {
-    if (!nome.trim() || !email.trim() || !senha.trim()) {
-      Alert.alert('Atenção', 'Nome, e-mail e senha são obrigatórios.');
+    if (!nome.trim())  { Alert.alert('Atenção', 'Informe seu nome completo.'); return; }
+    if (nome.trim().length < 3) { Alert.alert('Atenção', 'Nome deve ter pelo menos 3 caracteres.'); return; }
+    if (!email.trim()) { Alert.alert('Atenção', 'Informe seu e-mail.'); return; }
+    if (!validarEmail(email)) { Alert.alert('Atenção', 'E-mail inválido. Use o formato: nome@dominio.com'); return; }
+    if (telefone.trim() && telefone.replace(/\D/g, '').length < 10) {
+      Alert.alert('Atenção', 'Telefone inválido. Use DDD + número (ex: 11987654321).');
+      return;
+    }
+    if (!senha.trim()) { Alert.alert('Atenção', 'Informe uma senha.'); return; }
+    if (senha.length < 6) { Alert.alert('Atenção', 'A senha deve ter pelo menos 6 caracteres.'); return; }
+    if (!/[A-Za-z]/.test(senha) || !/[0-9]/.test(senha)) {
+      Alert.alert('Atenção', 'A senha deve conter letras e números.');
       return;
     }
     if (senha !== confirmarSenha) {
-      Alert.alert('Atenção', 'As senhas não coincidem!');
-      return;
-    }
-    if (senha.length < 6) {
-      Alert.alert('Atenção', 'A senha deve ter pelo menos 6 caracteres.');
+      Alert.alert('Atenção', 'As senhas não coincidem.');
       return;
     }
 

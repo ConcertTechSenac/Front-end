@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../constants/colors';
 import { useCart } from '../context/CartContext';
+import { useProducts } from '../context/ProductContext';
 import { fonteImagem } from '../data/produtos';
 
 function formatPreco(preco) {
@@ -65,6 +66,7 @@ function ItemCarrinho({ item, onAlterarQuantidade, onRemover }) {
 
 export default function CarrinhoScreen({ navigation }) {
   const { itens, alterarQuantidade, removerDoCarrinho, limparCarrinho, total, totalItens } = useCart();
+  const { getProdutoById } = useProducts();
 
   const handleRemover = (id) => {
     Alert.alert('Remover item', 'Deseja remover este item do carrinho?', [
@@ -74,6 +76,27 @@ export default function CarrinhoScreen({ navigation }) {
   };
 
   const handleFinalizar = () => {
+    // Verifica estoque atual de cada item antes de prosseguir
+    const problemas = itens.reduce((acc, item) => {
+      const produtoAtual = getProdutoById(item.id);
+      const estoqueAtual = produtoAtual?.estoque ?? item.estoque ?? 0;
+      if (estoqueAtual === 0) {
+        acc.push(`• ${item.nome}: sem estoque`);
+      } else if (item.quantidade > estoqueAtual) {
+        acc.push(`• ${item.nome}: apenas ${estoqueAtual} disponível(is)`);
+      }
+      return acc;
+    }, []);
+
+    if (problemas.length > 0) {
+      Alert.alert(
+        'Problema no estoque',
+        `Os itens abaixo não têm estoque suficiente:\n\n${problemas.join('\n')}\n\nAjuste as quantidades antes de finalizar.`,
+        [{ text: 'OK' }]
+      );
+      return;
+    }
+
     navigation.navigate('Checkout');
   };
 

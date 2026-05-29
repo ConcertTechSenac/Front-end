@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../constants/colors';
@@ -73,14 +74,24 @@ export default function ProdutoScreen({ route, navigation }) {
       ? Math.round((1 - produto.preco / produto.precoOriginal) * 100)
       : 0;
 
+  const semEstoque = (produto.estoque ?? 0) === 0;
+
   const handleAdicionarCarrinho = () => {
-    adicionarAoCarrinho(produto, quantidade);
+    const resultado = adicionarAoCarrinho(produto, quantidade);
+    if (!resultado.ok) {
+      Alert.alert('Atenção', resultado.erro);
+      return;
+    }
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 2000);
   };
 
   const handleComprarAgora = () => {
-    adicionarAoCarrinho(produto, quantidade);
+    const resultado = adicionarAoCarrinho(produto, quantidade);
+    if (!resultado.ok) {
+      Alert.alert('Atenção', resultado.erro);
+      return;
+    }
     navigation.navigate('Carrinho');
   };
 
@@ -171,9 +182,10 @@ export default function ProdutoScreen({ route, navigation }) {
               </TouchableOpacity>
               <Text style={styles.quantidadeValor}>{quantidade}</Text>
               <TouchableOpacity
-                style={styles.btnQuantidade}
-                onPress={() => setQuantidade((q) => q + 1)}
+                style={[styles.btnQuantidade, quantidade >= (produto.estoque ?? 0) && styles.btnQuantidadeDisabled]}
+                onPress={() => setQuantidade((q) => Math.min(q + 1, produto.estoque ?? q + 1))}
                 activeOpacity={0.7}
+                disabled={quantidade >= (produto.estoque ?? 0)}
               >
                 <Text style={styles.btnQuantidadeTexto}>+</Text>
               </TouchableOpacity>
@@ -204,18 +216,26 @@ export default function ProdutoScreen({ route, navigation }) {
 
       {/* Footer fixo */}
       <View style={styles.footer}>
-        <TouchableOpacity
-          style={[styles.btnAdicionar, adicionado && styles.btnAdicionado]}
-          onPress={handleAdicionarCarrinho}
-          activeOpacity={0.85}
-        >
-          <Text style={[styles.btnAdicionarTexto, adicionado && styles.btnAdicionadoTexto]}>
-            {adicionado ? '✓ Adicionado!' : 'Adicionar ao Carrinho'}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btnComprar} onPress={handleComprarAgora} activeOpacity={0.85}>
-          <Text style={styles.btnComprarTexto}>Comprar Agora</Text>
-        </TouchableOpacity>
+        {semEstoque ? (
+          <View style={styles.btnSemEstoque}>
+            <Text style={styles.btnSemEstoqueTexto}>Produto Indisponível</Text>
+          </View>
+        ) : (
+          <>
+            <TouchableOpacity
+              style={[styles.btnAdicionar, adicionado && styles.btnAdicionado]}
+              onPress={handleAdicionarCarrinho}
+              activeOpacity={0.85}
+            >
+              <Text style={[styles.btnAdicionarTexto, adicionado && styles.btnAdicionadoTexto]}>
+                {adicionado ? '✓ Adicionado!' : 'Adicionar ao Carrinho'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnComprar} onPress={handleComprarAgora} activeOpacity={0.85}>
+              <Text style={styles.btnComprarTexto}>Comprar Agora</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -346,6 +366,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnComprarTexto: { fontSize: 14, fontWeight: '700', color: COLORS.white },
+  btnSemEstoque: {
+    flex: 1,
+    backgroundColor: COLORS.gray200,
+    borderRadius: 12,
+    height: 52,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnSemEstoqueTexto: { fontSize: 15, fontWeight: '700', color: COLORS.gray400 },
   erroContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   erroTexto: { fontSize: 16, color: COLORS.gray400 },
 });

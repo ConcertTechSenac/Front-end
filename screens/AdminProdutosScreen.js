@@ -102,9 +102,18 @@ export default function AdminProdutosScreen({ navigation }) {
   // ── Salvar ─────────────────────────────────────────────────────────────────
 
   const validar = () => {
-    if (!form.nome.trim())                        return 'Informe o nome.';
-    if (!form.preco || isNaN(Number(form.preco))) return 'Informe um preço válido.';
-    if (!form.imagem.trim())                      return 'Informe a URL da imagem.';
+    if (!form.nome.trim() || form.nome.trim().length < 3)
+      return 'Nome deve ter pelo menos 3 caracteres.';
+    if (!form.preco || isNaN(Number(form.preco)) || Number(form.preco) <= 0)
+      return 'Informe um preço válido e maior que zero.';
+    if (form.precoOriginal && (isNaN(Number(form.precoOriginal)) || Number(form.precoOriginal) < Number(form.preco)))
+      return 'Preço original deve ser maior ou igual ao preço atual.';
+    if (form.estoque && (isNaN(Number(form.estoque)) || Number(form.estoque) < 0))
+      return 'Estoque não pode ser negativo.';
+    if (form.avaliacao && (isNaN(Number(form.avaliacao)) || Number(form.avaliacao) < 0 || Number(form.avaliacao) > 5))
+      return 'Avaliação deve ser entre 0 e 5.';
+    if (!form.imagem.trim())
+      return 'Informe a URL da imagem.';
     return null;
   };
 

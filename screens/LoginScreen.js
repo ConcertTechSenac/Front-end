@@ -16,11 +16,13 @@ export default function LoginScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
 
+  const validarEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim());
+
   const handleLogin = async () => {
-    if (!email.trim() || !senha.trim()) {
-      Alert.alert('Atenção', 'Preencha e-mail e senha.');
-      return;
-    }
+    if (!email.trim()) { Alert.alert('Atenção', 'Informe seu e-mail.'); return; }
+    if (!validarEmail(email)) { Alert.alert('Atenção', 'E-mail inválido.'); return; }
+    if (!senha.trim()) { Alert.alert('Atenção', 'Informe sua senha.'); return; }
+    if (senha.length < 6) { Alert.alert('Atenção', 'Senha deve ter pelo menos 6 caracteres.'); return; }
 
     setLoading(true);
     try {

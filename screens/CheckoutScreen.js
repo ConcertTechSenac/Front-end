@@ -73,7 +73,7 @@ function LinhaResumo({ label, valor, destaque, verde }) {
 
 export default function CheckoutScreen({ navigation }) {
   const { itens, total, totalItens, limparCarrinho } = useCart();
-  const { atualizarEstoque } = useProducts();
+  const { atualizarEstoque, getProdutoById } = useProducts();
 
   const frete       = total >= 299 ? 0 : 29.90;
   const totalFinal  = total + frete;
@@ -117,6 +117,20 @@ export default function CheckoutScreen({ navigation }) {
   const confirmar = () => {
     const err = validar();
     if (err) { Alert.alert('Atenção', err); return; }
+
+    // Revalida estoque em tempo real antes de fechar o pedido
+    const semEstoque = itens.filter(item => {
+      const prod = getProdutoById(item.id);
+      return (prod?.estoque ?? 0) < item.quantidade;
+    });
+    if (semEstoque.length > 0) {
+      Alert.alert(
+        'Estoque insuficiente',
+        `Não foi possível finalizar. Os seguintes itens não têm estoque suficiente:\n\n${semEstoque.map(i => `• ${i.nome}`).join('\n')}\n\nVolte ao carrinho e ajuste.`,
+        [{ text: 'OK' }]
+      );
+      return;
+    }
 
     const labelMetodo = METODOS.find(m => m.id === metodo)?.label ?? metodo;
     const msgParcela  = metodo === 'credito' && parcelas > 1
