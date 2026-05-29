@@ -1,3 +1,14 @@
+## 🔑 Acesso ao Painel Admin
+
+| Campo | Valor |
+| :--- | :--- |
+| Login | `adm` |
+| Senha | `adm` |
+
+> Para acessar o painel administrativo, toque 5 vezes no logo na tela de Login.
+
+---
+
 ## 📍 Estrutura de Rotas
 
 ### 🔐 Fluxo de Acesso
