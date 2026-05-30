@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 | :--- | :--- |
-| Login | `adm` |
-| Senha | `adm` |
+| E-mail | `admin` |
+| Senha | `admin` |
 
-> Para acessar o painel administrativo, toque 5 vezes no logo na tela de Login.
+> Basta logar na tela inicial com o e-mail `admin` e a senha `admin` — o app redireciona automaticamente para o Painel Administrativo.
 
 ---
 
